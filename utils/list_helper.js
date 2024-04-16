@@ -20,8 +20,8 @@ const favoriteBlog = (blogs) => {
 
   for (i = 0; i < blogs.length; i++) {
     if (favorite === blogs[i].likes) {
-      return blogs.indexOf(blogs[i]);
-      // console.log(blogs.indexOf(blogs[i]));
+      const { title, author, likes } = blogs[i];
+      return { title, author, likes };
     }
   }
 };

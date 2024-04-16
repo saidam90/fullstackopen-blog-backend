@@ -55,7 +55,13 @@ describe("favoriteBlog", () => {
   ];
 
   test("the favorite blog", () => {
+    const expectedResult = {
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 12,
+    };
+
     const result = listHelper.favoriteBlog(blogs);
-    assert.deepStrictEqual(result, 2);
+    assert.deepStrictEqual(result, expectedResult);
   });
 });
