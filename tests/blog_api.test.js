@@ -41,7 +41,7 @@ test("the unique identifier property is named id", async () => {
   assert(id);
 });
 
-test("a valid blog can be added ", async () => {
+test("a valid blog can be added", async () => {
   const newBlog = {
     title: "Mom's story",
     author: "Mom",
