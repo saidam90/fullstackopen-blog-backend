@@ -37,8 +37,8 @@ test("all blogs are returned", async () => {
 test("the unique identifier property is named id", async () => {
   const response = await api.get("/api/blogs");
 
-  const authors = response.body.map((blog) => blog.author);
-  assert(authors.includes("Saida"));
+  const id = response.body.every((blog) => "id" in blog);
+  assert(id);
 });
 
 test("a valid blog can be added ", async () => {
