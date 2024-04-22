@@ -4,9 +4,8 @@ const supertest = require("supertest");
 const mongoose = require("mongoose");
 const app = require("../app");
 const api = supertest(app);
-require("express-async-errors");
-
 const helper = require("./test_helper");
+require("express-async-errors");
 
 const Blog = require("../models/blog");
 
@@ -99,6 +98,26 @@ test("a blog can be deleted", async () => {
   assert(!authors.includes(blogToDelete.author));
 
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1);
+});
+
+test("return 0 if likes property is missed", async () => {
+  const newBlog = {
+    title: "Example Blog",
+    author: "Example author",
+    url: "https://example.com",
+  };
+
+  await api //break
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const blogsAtEnd = await helper.blogsInDb();
+
+  const addedBlog = blogsAtEnd.find((blog) => blog.title === newBlog.title);
+
+  assert.strictEqual(addedBlog.likes, 0);
 });
 
 after(async () => {
