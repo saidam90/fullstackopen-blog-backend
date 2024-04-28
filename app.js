@@ -7,6 +7,7 @@ const blogsRouter = require("./controllers/blogs");
 const usersRouter = require("./controllers/users");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
+const loginRouter = require("./controllers/login");
 
 const mongoUrl = config.MONGODB_URI;
 
@@ -28,5 +29,7 @@ app.use("/api/users", usersRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
+
+app.use("/api/login", loginRouter);
 
 module.exports = app;

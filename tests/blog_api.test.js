@@ -16,7 +16,7 @@ const User = require("../models/user");
 describe("when there is initially some blogs saved", () => {
   beforeEach(async () => {
     await Blog.deleteMany({});
-    // console.log("Database cleared");
+    console.log("Database cleared");
 
     for (let blogData of helper.initialBlogs) {
       let blogObject = new Blog(blogData);

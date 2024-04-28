@@ -1,5 +1,6 @@
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
+const User = require("../models/user");
 
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({});
@@ -8,19 +9,22 @@ blogsRouter.get("/", async (request, response) => {
 
 blogsRouter.post("/", async (request, response) => {
   const body = request.body;
+  const user = await User.findById(body.userId);
+
+  console.log(user);
 
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
+    userId: user.id,
   });
 
-  if (!body.title || !body.url) {
-    return response.status(400).json({ error: "Title or Url unspecified" });
-  }
+  const savedBlog = await blog.save(); // Corrected
+  user.blogs = user.blogs.concat(savedBlog._id);
+  await user.save();
 
-  const savedBlog = await blog.save();
   response.status(201).json(savedBlog);
 });
 
@@ -31,6 +35,7 @@ blogsRouter.get("/:id", async (request, response) => {
   } else {
     response.status(404).end();
   }
+  console.log(blog);
 });
 
 blogsRouter.put("/:id", async (request, response) => {
