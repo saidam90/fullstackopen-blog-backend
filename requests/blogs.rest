@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lMTAwIiwiaWQiOiI2NjJlMWRkYzc3NDc5ZTI2MTYyMTBlYmMiLCJpYXQiOjE3MTQzMDY0MjV9.loiqjeR6kE04y0zn6lvDROj4aKMH7k9jQUQM9prGHqk
+
+{
+  "title": "Test1045",
+  "author": "Test1045",
+  "url": "medium.com",
+  "likes": 10,
+  "userId": "662d59bc1c0054b548920377"
+}
